@@ -29,9 +29,9 @@ import org.demoiselle.jee.core.api.security.TokenType;
 @PreMatching
 @Priority(AUTHORIZATION)
 public class GatewayFilter implements ContainerRequestFilter {
-
+    
     private static final Logger logger = Logger.getLogger(GatewayFilter.class.getName());
-
+    
     @Override
     public void filter(ContainerRequestContext req) throws IOException {
         Response.ResponseBuilder responseBuilder = noContent();
@@ -51,7 +51,7 @@ public class GatewayFilter implements ContainerRequestFilter {
                 if (chave.isEmpty()) {
                     req.abortWith(responseBuilder.build());
                 } else {
-                    
+                    logger.info(chave);
                 }
             }
         } catch (Exception e) {
