@@ -14,26 +14,18 @@ import org.demoiselle.jee.configuration.annotation.ConfigurationSuppressLogger;
  *
  * @author SERPRO
  */
-@Configuration(prefix = "demoiselle.billing")
+@Configuration(prefix = "demoiselle.gateway")
 public class DemoiselleGatewayConfig implements Serializable {
 
     @ConfigurationSuppressLogger
-    private String hashcashKey;
+    private String key;
 
-    private Long timetoLiveMilliseconds;
-
-    private Long challenge;
-
-    public String getHashcashKey() {
-        return hashcashKey;
+    public String getKey() {
+        return key;
     }
 
-    public Long getTimetoLiveMilliseconds() {
-        return timetoLiveMilliseconds;
-    }
-
-    public Long getChallenge() {
-        return challenge;
+    public void setKey(String key) {
+        this.key = key;
     }
 
 }
