@@ -28,4 +28,13 @@ CREATE VIEW public.resume as
 select usuario id, dia, count(usuario) qtde
 from  public.hit
 group by usuario, dia
-order by usuario, dia
+order by usuario, dia;
+
+-- DROP SEQUENCE public.hibernate_sequence;
+
+CREATE SEQUENCE public.hibernate_sequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
