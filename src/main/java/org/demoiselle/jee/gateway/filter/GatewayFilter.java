@@ -21,7 +21,9 @@ import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import org.demoiselle.jee.core.exception.DemoiselleException;
+import org.demoiselle.jee.gateway.dao.ClientDAO;
 import org.demoiselle.jee.gateway.dao.HitDAO;
+import org.demoiselle.jee.gateway.entity.Client;
 import org.demoiselle.jee.gateway.entity.Hit;
 
 /**
@@ -36,7 +38,10 @@ public class GatewayFilter implements ContainerRequestFilter {
     private static final Logger logger = Logger.getLogger(GatewayFilter.class.getName());
 
     @Inject
-    private HitDAO dao;
+    private HitDAO hitDAO;
+
+    @Inject
+    private ClientDAO clientDAO;
 
     @Override
     @Transactional
@@ -50,14 +55,18 @@ public class GatewayFilter implements ContainerRequestFilter {
                     req.abortWith(Response.noContent().build());
                 }
 
+                Client client = clientDAO.find(UUID.fromString(chave));
+
+                if (client == null) {
+                    req.abortWith(Response.ok("{ \"mensagem\":\"Chave não cadastrada\"}").build());
+                }
+
                 Hit hit = new Hit();
                 hit.setCaminho(req.getUriInfo().getPath());
                 hit.setDia(new Date());
-                hit.setUsuario(UUID.fromString("966fc202-f2ef-423f-b64b-314274ca68b6"));
+                hit.setUsuario(UUID.fromString(chave));
 
-                dao.persist(hit);
-
-                logger.info(chave);
+                hitDAO.persist(hit);
 
             } else {
                 req.abortWith(Response.ok("{ \"mensagem\":\"Utilize o parametro Gateway com sua chave de acesso, no cabecalho da requisicao\"}").build());

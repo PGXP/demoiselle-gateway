@@ -28,4 +28,7 @@ CREATE VIEW public.resume as
 select usuario id, dia, count(usuario) qtde
 from  public.hit
 group by usuario, dia
-order by usuario, dia
+order by usuario, dia;
+
+INSERT INTO public.client(id, usuario, dias, qtde, caminho)
+ VALUES (0, '966fc202-f2ef-423f-b64b-314274ca68b6', 1, 100, '/ceps');
