@@ -30,10 +30,10 @@ from  public.hit
 group by usuario, dia
 order by usuario, dia;
 
-<<<<<<< HEAD
+
 INSERT INTO public.client(id, usuario, dias, qtde, caminho)
- VALUES (0, '966fc202-f2ef-423f-b64b-314274ca68b6', 1, 100, '/ceps');
-=======
+ VALUES (0, '966fc202-f2ef-423f-b64b-314274ca68b6', 1, 10000000, '/ceps');
+
 -- DROP SEQUENCE public.hibernate_sequence;
 
 CREATE SEQUENCE public.hibernate_sequence
@@ -42,4 +42,4 @@ CREATE SEQUENCE public.hibernate_sequence
   MAXVALUE 9223372036854775807
   START 1
   CACHE 1;
->>>>>>> 7c21bc77973a2dbbf7318760eb79db0e7a465d33
+

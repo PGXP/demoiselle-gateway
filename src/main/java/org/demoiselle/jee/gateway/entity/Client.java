@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.UUID;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,6 +33,9 @@ public class Client implements Serializable {
     private Integer dias;
 
     private Integer qtde;
+
+    @Transient
+    private Integer total;
 
     private String caminho;
 
@@ -72,6 +77,14 @@ public class Client implements Serializable {
 
     public void setCaminho(String caminho) {
         this.caminho = caminho;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
 }
