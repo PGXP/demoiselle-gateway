@@ -1,0 +1,6 @@
+org/demoiselle/jee/gateway/entity/Client.class
+org/demoiselle/jee/gateway/filter/GatewayFilter.class
+org/demoiselle/jee/gateway/entity/Resume.class
+org/demoiselle/jee/gateway/entity/Hit.class
+org/demoiselle/jee/gateway/dao/HitDAO.class
+org/demoiselle/jee/gateway/dao/ClientDAO.class
