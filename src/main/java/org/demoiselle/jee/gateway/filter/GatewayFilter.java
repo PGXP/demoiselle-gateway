@@ -78,7 +78,7 @@ public class GatewayFilter implements ContainerResponseFilter {
                 Client client = clientDAO.find(key);
 
                 if (client == null) {
-                    throw new DemoiselleRestException("Chave não cadastrada", BAD_REQUEST.getStatusCode());
+                    throw new DemoiselleRestException("Chave não cadastrada - " + chave, BAD_REQUEST.getStatusCode());
                 }
 
                 Integer resume = resumeDAO.getCount(key);
@@ -88,7 +88,7 @@ public class GatewayFilter implements ContainerResponseFilter {
                 }
 
                 if (resume >= client.getQtde()) {
-                    throw new DemoiselleRestException("Limite atingido para esse dia", BAD_REQUEST.getStatusCode());
+                    throw new DemoiselleRestException("Limite atingido para esse dia - " + resume + "/" + client.getQtde(), BAD_REQUEST.getStatusCode());
                 }
 
                 Hit hit = new Hit();
