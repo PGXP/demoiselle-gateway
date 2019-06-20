@@ -27,13 +27,17 @@ public class ResumeDAO extends AbstractDAO<Resume, UUID> {
         return em;
     }
 
-    public Resume getCount(UUID id) {
-        List<Resume> lista = em.createQuery("Select * from Recurso r GROUP BY r.name", Resume.class).setParameter("hoje", new Date(), TemporalType.DATE).getResultList();
+    public Integer getCount(UUID id) {
+
+        List<Resume> lista = em.createQuery("Select r from Resume r WHERE r.dia = :dia", Resume.class)
+                .setParameter("dia", new Date(), TemporalType.DATE)
+                .getResultList();
 
         if (lista.isEmpty()) {
             return null;
         } else {
-            return lista.get(0);
+            return lista.get(0).getQtde();
         }
+
     }
 }
