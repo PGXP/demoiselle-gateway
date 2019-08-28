@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,11 +29,8 @@ public class Hit implements Serializable {
     private Long id;
 
     private UUID usuario;
-
+    private String origem;
     private String caminho;
-
-    @Temporal(TemporalType.DATE)
-    private Date dia;
 
     public Long getId() {
         return id;
@@ -40,14 +38,6 @@ public class Hit implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getDia() {
-        return dia;
-    }
-
-    public void setDia(Date dia) {
-        this.dia = dia;
     }
 
     public String getCaminho() {
@@ -64,6 +54,14 @@ public class Hit implements Serializable {
 
     public void setUsuario(UUID usuario) {
         this.usuario = usuario;
+    }
+
+    public String getOrigem() {
+        return origem;
+    }
+
+    public void setOrigem(String origem) {
+        this.origem = origem;
     }
 
 }

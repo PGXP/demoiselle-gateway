@@ -17,18 +17,21 @@ CREATE TABLE public.hit
 (
   id bigserial,
   usuario uuid,
-  dia date,
+  origem character varying(64),
   caminho character varying(512),
+  data timestamp DEFAULT now(),
   CONSTRAINT hit_pkey PRIMARY KEY (id)
 );
 
 -- DROP VIEW public.resume;
 
-CREATE VIEW public.resume as
-select usuario id, dia, count(usuario) qtde
-from  public.hit
-group by usuario, dia
-order by usuario, dia;
+CREATE OR REPLACE VIEW public.resume AS 
+ SELECT hit.usuario AS id,
+    date(hit.data) dia,
+    count(hit.usuario) AS qtde
+   FROM hit
+  GROUP BY hit.usuario, date(hit.data)
+  ORDER BY hit.usuario, date(hit.data);
 
 
 INSERT INTO public.client(id, usuario, dias, qtde, caminho)
