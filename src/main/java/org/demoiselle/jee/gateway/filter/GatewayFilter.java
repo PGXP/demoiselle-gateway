@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import static javax.ws.rs.Priorities.AUTHORIZATION;
+import static javax.ws.rs.Priorities.HEADER_DECORATOR;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ContainerResponseContext;
@@ -21,6 +22,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static javax.ws.rs.core.Response.noContent;
 import javax.ws.rs.ext.Provider;
 import org.demoiselle.jee.gateway.annotation.Gateway;
 import org.demoiselle.jee.gateway.dao.ClientDAO;
@@ -29,6 +32,7 @@ import org.demoiselle.jee.gateway.dao.ResumeDAO;
 import org.demoiselle.jee.gateway.entity.Client;
 import org.demoiselle.jee.gateway.entity.Hit;
 import org.demoiselle.jee.gateway.entity.Resume;
+import org.demoiselle.jee.rest.exception.DemoiselleRestException;
 
 /**
  *

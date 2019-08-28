@@ -16,14 +16,13 @@ import javax.interceptor.InterceptorBinding;
 
 /**
  *
- * @author 70744416353
+ * @author PauloGladson
  */
 @Inherited
 @InterceptorBinding
 @Target({METHOD, TYPE})
 @Retention(RUNTIME)
 public @interface Gateway {
-
 
     @Nonbinding
     boolean enable() default true;

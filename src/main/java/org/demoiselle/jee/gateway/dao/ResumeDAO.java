@@ -12,6 +12,7 @@ import static javax.persistence.TemporalType.DATE;
 import org.demoiselle.jee.crud.AbstractDAO;
 import org.demoiselle.jee.gateway.entity.Resume;
 
+
 /**
  *
  * @author gladson
