@@ -69,9 +69,9 @@ public class GatewayFilter implements ContainerRequestFilter, ContainerResponseF
 
         if (method != null && classe != null && (method.getAnnotation(Gateway.class) != null || classe.getAnnotation(Gateway.class) != null)) {
 
-            if (req.getHeaders().containsKey("Gateway")) {
+            if (req.getHeaders().containsKey("X-Demoiselle-Gateway-Token")) {
 
-                String chave = req.getHeaders().get("Gateway").toString().replace("[", "").replace("]", "");
+                String chave = req.getHeaders().get("X-Demoiselle-Gateway-Token").toString().replace("[", "").replace("]", "");
 
                 if (chave.isEmpty()) {
                     req.abortWith(noContent().build());
@@ -101,7 +101,7 @@ public class GatewayFilter implements ContainerRequestFilter, ContainerResponseF
 
                         hitDAO.persist(hit);
                     }
-                    req.getHeaders().putSingle("gateway-count", "" + client.getTotal() + "/" + client.getQtde());
+                    req.getHeaders().putSingle("X-Demoiselle-Gateway-Count", "" + client.getTotal() + "/" + client.getQtde());
                 }
             } else {
                 req.abortWith(Response.status(Response.Status.BAD_GATEWAY).entity("{ \"mensagem\":\"Utilize o parametro Gateway com sua chave de acesso, no cabecalho da requisicao\"}").build());
@@ -113,10 +113,10 @@ public class GatewayFilter implements ContainerRequestFilter, ContainerResponseF
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        responseContext.getHeaders().putSingle("Demoiselle-gateway", "Enable");
+        responseContext.getHeaders().putSingle("X-Demoiselle-Gateway", "Enable");
 
         if (client != null) {
-            responseContext.getHeaders().putSingle("gateway-count", "" + client.getTotal() + "/" + client.getQtde());
+            responseContext.getHeaders().putSingle("X-Demoiselle-Gateway-Count", "" + client.getTotal() + "/" + client.getQtde());
         }
 
     }
