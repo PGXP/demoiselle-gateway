@@ -69,9 +69,9 @@ public class GatewayFilter implements ContainerRequestFilter, ContainerResponseF
 
         if (method != null && classe != null && (method.getAnnotation(Gateway.class) != null || classe.getAnnotation(Gateway.class) != null)) {
 
-            if (req.getHeaders().containsKey("X-Demoiselle-Gateway-Token")) {
+            if (req.getHeaders().containsKey("x-demoiselle-gateway-token")) {
 
-                String chave = req.getHeaders().get("X-Demoiselle-Gateway-Token").toString().replace("[", "").replace("]", "");
+                String chave = req.getHeaders().get("x-demoiselle-gateway-token").toString().replace("[", "").replace("]", "");
 
                 if (chave.isEmpty()) {
                     req.abortWith(noContent().build());
@@ -101,7 +101,7 @@ public class GatewayFilter implements ContainerRequestFilter, ContainerResponseF
 
                         hitDAO.persist(hit);
                     }
-                    req.getHeaders().putSingle("X-Demoiselle-Gateway-Count", "" + client.getTotal() + "/" + client.getQtde());
+                    req.getHeaders().putSingle("x-demoiselle-gateway-count", "" + client.getTotal() + "/" + client.getQtde());
                 }
             } else {
                 req.abortWith(Response.status(Response.Status.BAD_GATEWAY).entity("{ \"mensagem\":\"Utilize o parametro Gateway com sua chave de acesso, no cabecalho da requisicao\"}").build());
@@ -113,10 +113,10 @@ public class GatewayFilter implements ContainerRequestFilter, ContainerResponseF
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        responseContext.getHeaders().putSingle("X-Demoiselle-Gateway", "Enable");
+        responseContext.getHeaders().putSingle("x-demoiselle-gateway", "enable");
 
         if (client != null) {
-            responseContext.getHeaders().putSingle("X-Demoiselle-Gateway-Count", "" + client.getTotal() + "/" + client.getQtde());
+            responseContext.getHeaders().putSingle("x-demoiselle-gateway-count", "" + client.getTotal() + "/" + client.getQtde());
         }
 
     }
