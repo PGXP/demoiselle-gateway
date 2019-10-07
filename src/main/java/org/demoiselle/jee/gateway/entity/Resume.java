@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,6 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author gladson
  */
 @Entity
+@Cacheable
 @Table
 @XmlRootElement
 public class Resume implements Serializable {
